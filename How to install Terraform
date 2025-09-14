@@ -4,7 +4,7 @@
 ------------------------------------------------------------------
 1. How to install Terraform (step by step)
    firstly create one ec2 instance manually or install terraform in local based on your requirements 
-   -For Linux/Ubuntu (EC2 instance or local machine)
+   -----For Linux/Ubuntu (EC2 instance or local machine)
    Run these commands one by one:
    # Update system         : sudo apt-get update && sudo apt-get upgrade -y
    # Install dependencies  : sudo apt-get install -y wget unzip
@@ -12,13 +12,61 @@
    # Unzip it              : unzip terraform_1.9.8_linux_amd64.zip
    # Move Terraform binary to /usr/local/bin : sudo mv terraform /usr/local/bin/
    # Verify installation   : terraform -version
--For Windows
+------For Windows
    Download Terraform ZIP from Terraform Official Downloads
    Extract the ZIP file.
    Copy the terraform.exe file to a folder (e.g., C:\terraform).
    Add that folder to PATH : Go to System Properties > Advanced > Environment Variables > Path > Edit > Add C:\terraform.
    Open PowerShell or CMD and run : terraform -version
 ---------------------------------------------------------------------------------------------------------------------------
+2. IAM setup manually
+   Step 1 : Create IAM User
+            Login to AWS Management Console.
+            Go to IAM → Users → Add users.
+            Enter a username (e.g., terraform-user).
+            Select Access type:  ✅ Programmatic access (for CLI/Terraform) or (Optional: AWS Management Console access if you also want console login).
+            Click Next.
+
+   Step 2: Create or Attach Permissions 
+           *Here you have 2 choices*
+           1.For learning only → attach AdministratorAccess (not recommended in real-world).
+           2.For best practice → attach only specific policies (e.g., AmazonEC2FullAccess, AmazonS3FullAccess).
+           👉 Choose Attach existing policies directly and check the box.
+           Click Next → Create user.
+           ⚠️ Download the .csv file (contains Access Key + Secret Key). You’ll need this for Terraform CLI setup.
+
+   Step 3: Configure AWS CLI On your local machine/EC2, run : aws configure
+           Enter : Access Key ID 
+                 : Secret Access Key
+                 : Default region (e.g., us-east-1)
+                 : Output format (json)
+           **Now your machine is ready to use Terraform.**
+
+  Step 4:  Create IAM Group (optional but good practice)
+           IAM → User groups → Create group (e.g., terraform-admins).
+           Attach policies to group (AdministratorAccess for learning).
+           Add your terraform-user to this group.
+           ✅ Now any new users you add to this group automatically get permissions.
+
+  Step 5:  Create IAM Role (for EC2) This is useful if you want EC2 instances to access AWS services (e.g., S3, DynamoDB) without keys.
+           IAM → Roles → Create role.
+           Choose AWS service → EC2.
+           Attach policies:
+           Example: AmazonS3ReadOnlyAccess (if you want EC2 to read from S3).
+           Example: AmazonEC2FullAccess (if you want more permissions).
+           Name it: ec2-s3-role.
+           Finish → Role created.
+
+  Step 6:  Attach Role to EC2 Instance
+           Go to EC2 → Instances.
+           Select your instance → Actions → Security → Modify IAM Role.
+           Choose the role you just created (ec2-s3-role).
+           Save.
+           Now your EC2 can access AWS services (try aws s3 ls inside EC2 — it should work without credentials)
+
+✅ That’s it! You’ve manually set up IAM User + Group + Role + Instance Profile.
+
+----------------------------------------------------------------------------------------------------------------------------
 3. Real-Time Project (Hands-on Practice)  👉 Project: Deploy an AWS Infrastructure with Terraform
    This project will create:
    1 VPC (Virtual Private Cloud)
