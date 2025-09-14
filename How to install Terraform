@@ -171,10 +171,46 @@ resource "aws_instance" "my_ec2" {
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 4. learn codings : Let’s build your Terraform coding journey step by step — starting simple and moving towards real-world DevOps projects.
-   Step 1              :  Basics — Write Your First Terraform Code
+
+   Step 1: Basics — Write Your First Terraform Code
    Create a folder     :  mkdir terraform-project  then cd terraform-project
    Create a file       :  main.tf
    Run commands        :  terraform init, terraform plan, terraform apply -auto-approve
+
+   Step 2: Add Variables & Outputs
+   variables.tf: under this file write the codes 
+                      variable "bucket_name" {
+                             default = "my-terraform-bucket-2025"
+                               }
+   agian update the details in main.tf :
+             resource "aws_s3_bucket" "mybucket" {
+                bucket = var.bucket_name
+                 tags = {
+                   Name = "BucketFromVar"
+                    }
+                   }
+   outputs.tf : 
+       output "bucket_name" {
+          value = aws_s3_bucket.mybucket.bucket
+           }
+| File                   | Purpose                                   |
+| ---------------------- | ----------------------------------------- |
+| **`main.tf`**          | Core Terraform code (resources, provider) |
+| **`variables.tf`**     | Input parameters (makes code reusable)    |
+| **`outputs.tf`**       | Useful info displayed after deployment    |
+| **`terraform.tfvars`** | Actual values for your variables          |
+
+   Question : can i do write all terraform codes in on file ??????????????
+   Answer   : Yes ✅ you can put all your Terraform code in a single file (usually main.tf).
+              Terraform does not require you to split files — it just reads all .tf files
+              in a folder and merges them internally before execution.
+
+   Question : Then why split into multiple files? 🤔
+   Answer   : Organization: Large projects get messy if everything is in one file.
+
+  Reusability : Variables and outputs are easier to manage separately.
+  Teamwork: Different people can work on vpc.tf, ec2.tf, alb.tf etc.
+  In real DevOps projects, we usually split files (main.tf, variables.tf, outputs.tf, terraform.tfvars) or even use modules.
 
 
 
