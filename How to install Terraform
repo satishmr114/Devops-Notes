@@ -1,6 +1,11 @@
 1. How to install Terraform (step by step) 
 2. IAM setup manually
 3. A real-time DevOps project using Terraform (hands-on practice)
+4. learn codings 
+5. 👉 Run commands : terraform init
+                      terraform plan
+                      terraform apply -auto-approve
+
 ------------------------------------------------------------------
 1. How to install Terraform (step by step)
    firstly create one ec2 instance manually or install terraform in local based on your requirements 
@@ -18,7 +23,7 @@
    Copy the terraform.exe file to a folder (e.g., C:\terraform).
    Add that folder to PATH : Go to System Properties > Advanced > Environment Variables > Path > Edit > Add C:\terraform.
    Open PowerShell or CMD and run : terraform -version
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 2. IAM setup manually
    Step 1 : Create IAM User
             Login to AWS Management Console.
@@ -66,7 +71,7 @@
 
 ✅ That’s it! You’ve manually set up IAM User + Group + Role + Instance Profile.
 
-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 3. Real-Time Project (Hands-on Practice)  👉 Project: Deploy an AWS Infrastructure with Terraform
    This project will create:
    1 VPC (Virtual Private Cloud)
@@ -159,11 +164,17 @@ resource "aws_instance" "my_ec2" {
   }
 }
 
-Step 3: Initialize Terraform         : terraform init
-step 4: Validate the configuration   : terraform validate
-Step 5: Apply the configuration      : terraform apply -auto-approve
-Step 6: Destroy (to save cost)       : terraform destroy -auto-approve
+   Step 3: Initialize Terraform         : terraform init
+   step 4: Validate the configuration   : terraform validate
+   Step 5: Apply the configuration      : terraform apply -auto-approve
+   Step 6: Destroy (to save cost)       : terraform destroy -auto-approve
+--------------------------------------------------------------------------------------------------------------------------------------------------
 
+4. learn codings : Let’s build your Terraform coding journey step by step — starting simple and moving towards real-world DevOps projects.
+   Step 1              :  Basics — Write Your First Terraform Code
+   Create a folder     :  mkdir terraform-project  then cd terraform-project
+   Create a file       :  main.tf
+   Run commands        :  terraform init, terraform plan, terraform apply -auto-approve
 
 
 
