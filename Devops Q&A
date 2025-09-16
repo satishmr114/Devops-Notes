@@ -54,3 +54,115 @@ Ans : 1. IAM (Identity and Access Management)
 Create IAM first → then VPC.
 
 ------------------------------------------------
+
+Q2  : concepts – IPs, DNS, ports, firewalls.
+
+Ans : 1. IP (Internet Protocol Address)
+
+Ex  : Think of an IP as the address of a house, 
+      but for a computer on a network.
+
+    IPv4 → 32-bit, e.g., 192.168.1.10
+    IPv6 → 128-bit, e.g., 2001:db8::1 (used  
+    because IPv4 addresses are limited)
+
+
+👉 Two types of IPs:
+
+Private IP (used inside local networks, e.g., 192.168.x.x, 10.x.x.x)
+
+Public IP (unique on the internet, e.g., your WiFi/router’s IP)
+
+
+📌 Example:
+If your laptop IP is 192.168.1.5 and server IP is 192.168.1.100, they can talk directly inside the same network.
+
+Command to check your IP:
+
+ifconfig   # Linux/macOS
+ip addr    # Linux (modern)
+ipconfig   # Windows
+
+
+2. DNS (Domain Name System)
+
+DNS is like a phonebook of the internet. It converts human-readable names → IP addresses.
+
+When you type www.google.com, DNS resolves it to something like 142.250.190.14.
+
+Without DNS, we’d have to remember IPs, which is impossible at scale.
+
+
+📌 Example:
+
+nslookup google.com This will show the IP address of Google’s servers.
+
+3. Ports
+
+Ports are like doors in a house — they let specific types of traffic in/out.
+
+A server has 65,535 ports.
+
+Common ports:
+
+22 → SSH (remote login)
+
+80 → HTTP (websites)
+
+443 → HTTPS (secure websites)
+
+3306 → MySQL database
+
+8080 → Alternative HTTP for apps
+
+
+
+📌 Example:
+If you run a web app on your server, it may run on http://server-ip:8080.
+
+Check open ports on Linux:
+
+netstat -tuln
+ss -tuln
+
+
+4. Firewalls
+
+A firewall is like a security guard — it controls what traffic can enter or leave a system.
+
+It allows/blocks traffic based on IP + Port + Protocol.
+
+Example:
+
+Allow SSH (port 22) from your office IP.
+
+Block all other traffic from unknown IPs.
+
+
+
+On Linux (UFW firewall):
+
+# Allow SSH
+sudo ufw allow 22  
+
+# Allow HTTP
+sudo ufw allow 80  
+
+# Deny everything else
+sudo ufw default deny incoming  
+
+# Enable firewall
+sudo ufw enable
+
+
+✅ Why this matters in DevOps:
+
+You’ll deploy apps on servers. Understanding IPs, DNS, ports, and firewalls helps you:
+
+Configure servers
+
+Debug connection issues
+
+Secure your infrastructure
+
+
