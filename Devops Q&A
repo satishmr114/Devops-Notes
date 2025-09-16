@@ -1,2 +1,57 @@
-Q : As a devops engineer if I am doing AWS setup                       for the first time which one should I need to create either Iam or VPC
+Q1. : As a devops engineer if I am doing AWS
+      setup for the first time which one should  
+      i need to create either Iam or VPC
 
+Ans : 1. IAM (Identity and Access Management)
+
+      First thing you should do after creating  
+      your AWS account is secure it.
+
+      Why? Because by default, you only have the  
+      root user (full access, very risky).
+
+      Steps:
+
+      1. Create an Admin IAM user (instead of 
+         using root).
+      2. Enable MFA (Multi-Factor    
+         Authentication) for the root account.
+      3. Create IAM groups & policies for 
+         developers/DevOps.
+      4. Generate access keys (to use with CLI/
+         Terraform).
+
+
+👉 IAM comes first because it controls who can access AWS and what they can do. Without it, everything else is insecure.
+
+      2. VPC (Virtual Private Cloud)
+
+         Once IAM is set up and secure, next 
+         step is network setup.
+
+         VPC defines your cloud network (like 
+         your private data center inside AWS).
+
+     Steps:
+
+          1. Create a custom VPC (don’t rely  
+             only on the default one).
+          2. Add subnets (public/private).
+          3. Add Internet Gateway (IGW) for 
+             internet access.
+          4. Configure route tables.
+          5. Set up security groups & NACLs.
+
+
+👉 VPC comes second because you need a network in place before launching EC2, RDS, or other services.
+
+🔹 Rule of Thumb for DevOps AWS Setup
+
+1. Secure first → IAM
+2. Build network → VPC
+3. Then deploy resources → EC2, S3, RDS, etc.
+
+✅ So the answer:
+Create IAM first → then VPC.
+
+------------------------------------------------
