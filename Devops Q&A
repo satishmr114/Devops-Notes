@@ -21,7 +21,6 @@ Ans : 1. IAM (Identity and Access Management)
       4. Generate access keys (to use with CLI/
          Terraform).
 
-
 👉 IAM comes first because it controls who can access AWS and what they can do. Without it, everything else is insecure.
 
       2. VPC (Virtual Private Cloud)
